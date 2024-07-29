@@ -1,4 +1,4 @@
-use sqlx::{types::chrono::{DateTime, Local}, PgPool};
+use sqlx::{postgres::PgTransactionManager, types::chrono::{DateTime, Local}, PgPool};
 
 struct User{
     user_id: u64,
@@ -9,7 +9,9 @@ struct User{
 
 impl User{
 
-    async fn create_user(username: String, email: String, password: String) -> Self{
+    async fn create_user(pool: &PgTransactionManager, username: String, email: String, password: String) -> Self{
+        
+        
         Self {
             user_id: 2,
             username,

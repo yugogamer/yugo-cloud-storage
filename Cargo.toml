@@ -4,8 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+argon2 = "0.5.3"
 dotenv = "0.15.0"
 rust-s3 = "0.34.0"
+thiserror = "1.0.63"
 
 
 [dependencies.rocket]
