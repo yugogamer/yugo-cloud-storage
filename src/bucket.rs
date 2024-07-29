@@ -15,14 +15,15 @@ async fn connect_to_s3(rocket: Rocket<Build>) -> fairing::Result{
 
     let region_name = std::env::var("REGION_NAME").unwrap_or("".into());
     let endpoint = std::env::var("ENDPOINT").unwrap_or("".into());
-
+    
     let region = Region::Custom { region: region_name, endpoint };
     
     let bucket_name = std::env::var("BUCKET_NAME").unwrap_or("".into());
 
+
     match Bucket::new(&bucket_name, region, credentials){
         Ok(bucket) => {
-            match bucket.list("".to_string(), None).await{
+            match bucket.exists().await{
                 Ok(_) => Ok(rocket),
                 Err(err) => {
                     error!("no connection to bucket : {err}");

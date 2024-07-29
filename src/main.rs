@@ -2,6 +2,7 @@
 mod services;
 mod database;
 mod bucket;
+use dotenv::dotenv;
 
 #[get("/")]
 fn index() -> &'static str {
@@ -10,6 +11,8 @@ fn index() -> &'static str {
 
 #[launch]
 fn rocket() -> _ {
+    dotenv().ok(); 
+    
     rocket::build()
         .attach(database::load_db())
         .attach(bucket::load_bucket())
