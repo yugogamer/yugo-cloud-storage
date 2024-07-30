@@ -3,7 +3,11 @@ mod services;
 mod database;
 mod bucket;
 mod utils;
+mod errors;
+use crate::errors::Error;
 use dotenv::dotenv;
+
+pub type Result<T> = core::result::Result<T, Error>;
 
 #[get("/")]
 fn index() -> &'static str {
