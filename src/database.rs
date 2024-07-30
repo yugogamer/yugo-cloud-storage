@@ -1,6 +1,8 @@
 use rocket::{Build, fairing, Rocket};
 use rocket::fairing::AdHoc;
-use sqlx::PgPool;
+use sqlx::{PgPool, Postgres, Transaction};
+
+pub type PgTransaction = Transaction<'static, Postgres>;
 
 pub fn load_db() -> AdHoc {
     AdHoc::on_ignite("Postgres pool Stage", |rocket| async {
